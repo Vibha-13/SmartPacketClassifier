@@ -1,7 +1,9 @@
-Flow Duration,Total Fwd Packets,Total Bwd Packets,Fwd Packet Length Mean,Bwd Packet Length Mean,Prediction
-45000.0,22,18,512.3,486.7,Video Stream
-70000.0,30,25,600.0,550.0,Suspicious
-2025-07-11 21:13:22.102296,45000,22,18,512.3,486.7,Video Stream
-2025-07-11 21:26:22.032361,45000,22,18,512.3,486.7,Video Stream
-2025-07-11 21:29:36.008028,70000,30,25,600.0,550.0,Suspicious
-2025-07-11 21:34:39.897224,70000,25,30,550.0,600.0,Suspicious
+Timestamp,Flow Duration,Fwd Packets,Bwd Packets,Fwd Length Mean,Bwd Length Mean,Prediction
+2025-07-11 21:58:09,45000,22,18,512.3,486.7,Video Stream
+2025-07-11 21:58:25,45000,22,18,512.3,486.7,Video Stream
+2025-07-11 21:58:37,45000,22,18,512.3,486.7,Video Stream
+2025-07-11 21:58:44,45000,22,18,512.3,486.7,Video Stream
+2025-07-11 21:58:54,45000,22,18,512.3,486.7,Video Stream
+2025-07-11 21:58:59,45000,22,18,512.3,486.7,Video Stream
+2025-07-11 21:59:13,45000,22,18,512.3,486.7,Video Stream
+2025-07-11 22:03:03,70000,22,18,512.3,486.7,Suspicious
