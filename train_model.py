@@ -1,29 +1,39 @@
-# train_model.py
-
 import pandas as pd
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
 import pickle
 
-# Dummy training data
-data = {
-    'Flow Duration': [10000, 50000, 30000, 70000],
-    'Total Fwd Packets': [10, 22, 15, 30],
-    'Total Backward Packets': [8, 18, 12, 25],
-    'Fwd Packet Length Mean': [200, 512.3, 350, 600],
-    'Bwd Packet Length Mean': [180, 486.7, 320, 550],
-    'Label': ['Normal', 'Video Stream', 'Normal', 'Suspicious']
-}
+# Load REAL dataset
+df = pd.read_csv("cicids_aligned.csv")
 
-df = pd.DataFrame(data)
+# Clean
+df.replace([float('inf'), float('-inf')], 0, inplace=True)
+df.dropna(inplace=True)
 
-X = df.drop('Label', axis=1)
-y = df['Label']
+# Features + Label
+X = df.drop("Label", axis=1)
+y = df["Label"]
 
-model = DecisionTreeClassifier()
-model.fit(X, y)
+# Split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
 
-# Save the model
-with open('packet_model.pkl', 'wb') as f:
+# Model
+model = RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1)
+model.fit(X_train, y_train)
+
+# Evaluation
+y_pred = model.predict(X_test)
+
+print("\n=== PACKET CLASSIFIER PERFORMANCE ===")
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nClassification Report:\n")
+print(classification_report(y_test, y_pred))
+
+# Save
+with open("packet_model.pkl", "wb") as f:
     pickle.dump(model, f)
 
-print("✅ Model trained and saved as 'packet_model.pkl'")
+print("\n✅ Model trained and saved")
